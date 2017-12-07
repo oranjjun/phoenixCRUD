@@ -1,7 +1,9 @@
-import React from "react"
-import axios from "axios"
+import React from 'react'
+import axios from 'axios'
+import appConfig from '../appConfig.js'
+
 class Form extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       title: '',
@@ -18,8 +20,8 @@ class Form extends React.Component {
     console.log(this.state)
     axios({
       method: 'post',
-      headers: {"Content-Type": "application/json"},
-      url: 'http://localhost:4000/api/blogs',
+      headers: {'Content-Type': 'application/json'},
+      url: appConfig.API_URL[process.env.NODE_ENV] + '/api/blogs',
       data: {
         blogs: {
           title: this.state.title,
@@ -30,7 +32,7 @@ class Form extends React.Component {
         }
       }
     })
-    /*axios.post('http://localhost:4000/api/blogs', {
+    /* axios.post('http://localhost:4000/api/blogs', {
       headers: {"Content-Type": "application/json"},
       data: {
           title: this.state.title,
@@ -39,82 +41,82 @@ class Form extends React.Component {
           link: this.state.link,
           author: this.state.author
       }
-    })*/
+    }) */
   }
 
-  handleChange(event) {
+  handleChange (event) {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  render() {
+  render () {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className="field">
-          <label className="label">Title</label>
-          <div className="control">
+        <div className='field'>
+          <label className='label'>Title</label>
+          <div className='control'>
             <input
-              name="title"
-              className="input"
-              type="text"
-              value = {this.state.title}
-              onChange = {this.handleChange}
+              name='title'
+              className='input'
+              type='text'
+              value={this.state.title}
+              onChange={this.handleChange}
             />
           </div>
         </div>
-      <div className="field">
-          <label className="label">Subtitle</label>
-          <div className="control">
+        <div className='field'>
+          <label className='label'>Subtitle</label>
+          <div className='control'>
             <input
-              name="subtitle"
-              className="input"
-              type="text"
-              value = {this.state.subtitle}
-              onChange = {this.handleChange}
+              name='subtitle'
+              className='input'
+              type='text'
+              value={this.state.subtitle}
+              onChange={this.handleChange}
             />
           </div>
         </div>
-      <div className="field">
-          <label className="label">Image</label>
-          <div className="control">
+        <div className='field'>
+          <label className='label'>Image</label>
+          <div className='control'>
             <input
-              name="image"
-              className="input"
-              type="text"
-              placeholder="Enter Image URL"
-              onChange = {this.handleChange}
+              name='image'
+              className='input'
+              type='text'
+              placeholder='Enter Image URL'
+              onChange={this.handleChange}
             />
           </div>
         </div>
-      <div className="field">
-          <label className="label">Link</label>
-          <div className="control">
+        <div className='field'>
+          <label className='label'>Link</label>
+          <div className='control'>
             <input
-              name="link"
-              className="input"
-              type="text"
-              value = {this.state.link}
-              onChange = {this.handleChange}
+              name='link'
+              className='input'
+              type='text'
+              value={this.state.link}
+              onChange={this.handleChange}
             />
           </div>
         </div>
-      <div className="field">
-          <label className="label">Author</label>
-          <div className="control">
+        <div className='field'>
+          <label className='label'>Author</label>
+          <div className='control'>
             <input
-              name="author"
-              className="input"
-              type="text"
-              value = {this.state.author}
-              onChange = {this.handleChange}
+              name='author'
+              className='input'
+              type='text'
+              value={this.state.author}
+              onChange={this.handleChange}
             />
           </div>
         </div>
         <button
-          type="submit"
-          value="Submit"
-          className="button is-primary"
+          type='submit'
+          value='Submit'
+          className='button is-primary'
         >
         Submit
         </button>

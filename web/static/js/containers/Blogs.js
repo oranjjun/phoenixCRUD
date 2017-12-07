@@ -1,70 +1,71 @@
-import React from "react"
-import axios from "axios"
-import BlogCard from "../presentationals/BlogCard"
-import { Link } from 'react-router-dom';
+import React from 'react'
+import axios from 'axios'
+import BlogCard from '../presentationals/BlogCard'
+import { Link } from 'react-router-dom'
+import appConfig from '../appConfig.js'
 
 class Blogs extends React.Component {
-  constructor() {
-    super();
-    this.state = { blogs: [] };
+  constructor () {
+    super()
+    this.state = { blogs: [] }
   }
-  componentWillMount() {
-    axios.get('http://localhost:4000/api/blogs')
+  componentWillMount () {
+    axios.get(appConfig.API_URL[process.env.NODE_ENV] + '/api/blogs')
       .then(response => {
-        console.log(response);
-        this.setState({ blogs: response.data.blogs });
+        console.log(response)
+        this.setState({ blogs: response.data.blogs })
       })
       .catch(error => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   }
-  render() {
+  render () {
     const posts = this.state.blogs.map((blog, index) =>
       <BlogCard
-        key = { index }
-        title = { blog.title }
-        subtitle = { blog.subtitle }
-        image = { blog.image }
-        link = { blog.link }
-        author = { blog.author }
+        key={index}
+        title={blog.title}
+        subtitle={blog.subtitle}
+        image={blog.image}
+        link={blog.link}
+        author={blog.author}
       />
     )
     return (
       <div>
-        <div className="is-primary is-large"
-          style = {{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            padding: "10px 15px",
-            background: "#00D1B2",
-            color: "#FFFFFF"
+        <div className='is-primary is-large'
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            padding: '10px 15px',
+            background: '#00D1B2',
+            color: '#FFFFFF'
           }}
         >
-          <Link 
-            to="/create" 
-            style = {{ color: "white" }}
+          <Link
+            to='/create'
+            style={{ color: 'white' }}
           >
           Create Blog Post
           </Link>
         </div>
-        <div className="is-primary is-large"
-          style = {{
-            position: "absolute",
-            top: "80px",
-            right: "10px",
-            padding: "10px 15px",
-            background: "#00D1B2"
+        <div className='is-primary is-large'
+          style={{
+            position: 'absolute',
+            top: '80px',
+            right: '10px',
+            padding: '10px 15px',
+            background: '#00D1B2'
           }}
         >
           <Link
-            to="/update"
-            style = {{ color: "white" }}
+            to='/update'
+            style={{ color: 'white' }}
           >
           Edit Blog Post
           </Link>
         </div>
-      {posts}
+        {posts}
       </div>
     )
   }
